@@ -3,6 +3,7 @@
 class Vonnda_Taxify_TaxifyController extends Mage_Adminhtml_Controller_Action
 {
 
+    // Show order export page
     public function indexAction()
     {
         $this->loadLayout();
@@ -11,6 +12,7 @@ class Vonnda_Taxify_TaxifyController extends Mage_Adminhtml_Controller_Action
         $this->renderLayout();
     }
 
+    // Exports previous orders for people that want to migrate to taxify
     public function exportAction()
     {
         $export = Mage::getModel('taxify/export');

@@ -1,5 +1,7 @@
 <?php
 
+// Responsible for creating a mass export of all orders for people
+// wishing to import orders into taxify
 class Vonnda_Taxify_Model_Export extends Mage_Core_Model_Abstract
 {
 

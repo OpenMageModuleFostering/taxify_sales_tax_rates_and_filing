@@ -10,7 +10,7 @@ class HelperDataTest extends PHPUnit_Framework_TestCase
             '' => 'None',
             'RESALE' => 'Resale',
             'RETAIL' => 'Retail',
-            'USETAX' => 'Usetax',
+            //'USETAX' => 'Usetax',
         );
         $this->assertEquals($expected, $options);
     }

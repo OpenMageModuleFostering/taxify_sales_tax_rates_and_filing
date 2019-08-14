@@ -1,5 +1,7 @@
 <?php
 
+// Responsible for generating a single row in the order export for people
+// switching to Taxify from another legacy system
 class Vonnda_Taxify_Model_Export_Row extends Mage_Core_Model_Abstract
 {
     public $map = array();

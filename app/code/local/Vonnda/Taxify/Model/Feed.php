@@ -1,5 +1,7 @@
 <?php
 
+// Will periodically fetch feed for updates.  These notificaions
+// will show up in admin section.
 class Vonnda_Taxify_Model_Feed extends Mage_Core_Model_Abstract
 {
 

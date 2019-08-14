@@ -1,5 +1,7 @@
 <?php
 
+// Responsible for creating a taxify GetCodes API call
+// Can fetch Item and Customer tax codes
 class Vonnda_Taxify_Model_Request_Codes extends Vonnda_Taxify_Model_Request_Request
 {
     public $apiMethod = 'GetCodes';

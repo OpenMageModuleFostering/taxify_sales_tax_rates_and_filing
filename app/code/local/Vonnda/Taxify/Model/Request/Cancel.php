@@ -1,5 +1,6 @@
 <?php
 
+// Responsible for creating a taxify cancel API call
 class Vonnda_Taxify_Model_Request_Cancel extends Vonnda_Taxify_Model_Request_Request
 {
 

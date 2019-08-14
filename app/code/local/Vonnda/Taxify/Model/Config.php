@@ -1,5 +1,7 @@
 <?php
 
+// All config values are pulled from here, new config values should be
+// added here if necessary.
 class Vonnda_Taxify_Model_Config extends Mage_Core_Model_Abstract
 {
 

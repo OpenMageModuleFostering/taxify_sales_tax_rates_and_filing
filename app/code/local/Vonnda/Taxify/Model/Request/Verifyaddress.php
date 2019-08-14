@@ -1,5 +1,6 @@
 <?php
 
+// Responsible for creating a taxify address verify API call
 class Vonnda_Taxify_Model_Request_Verifyaddress extends Vonnda_Taxify_Model_Request_Request
 {
 

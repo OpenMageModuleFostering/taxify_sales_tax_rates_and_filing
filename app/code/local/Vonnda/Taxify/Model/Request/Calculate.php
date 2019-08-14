@@ -1,5 +1,6 @@
 <?php
 
+// Responsible for creating a taxify calculate API call
 class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_Request
 {
     public $apiMethod = 'CalculateTax';
@@ -173,7 +174,8 @@ class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_
             return $items;
         }
 
-        $pennies = (int) $discountAmount * 100;
+        $pennies = $discountAmount * 100;
+        $pennies = (int) $pennies;
         while ($pennies > 0) {
             foreach ($items as $index => $item) {
                 if ($this->isShippingItem($item)) {

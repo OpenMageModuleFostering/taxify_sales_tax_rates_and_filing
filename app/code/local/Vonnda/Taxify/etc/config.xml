@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Vonnda_Taxify>
-            <version>0.1.9</version>
+            <version>0.2.0</version>
         </Vonnda_Taxify>
     </modules>
     <global>
@@ -109,8 +109,12 @@
         </tax>
         <taxify>
             <feed>
+                <!-- URI to admin notification feed (see readme) -->
                 <url>http://magento.vonnda.net/rss/taxify.rss</url>
+
                 <use_https>0</use_https>
+
+                <!-- Hours between checking for notifications -->
                 <frequency>24</frequency>
             </feed>
         </taxify>

@@ -80,7 +80,7 @@ class CalculateTest extends PHPUnit_Framework_TestCase
 
         $resp = $calculate->getItemTaxabilityCode($item);
 
-        $this->assertEquals('', $resp);
+        $this->assertEquals('NONTAX', $resp);
 
 
         $calculate = Mage::getModel('taxify/request_calculate');
@@ -124,6 +124,7 @@ class CalculateTest extends PHPUnit_Framework_TestCase
             0.000 => array(295.00, 5.00),
             295.000 => array(0.00, 5.00),
             300.000 => array(0.00, 5.00),
+            '26.500' => array(268.50, 5.00),
         );
 
         $calculate = Mage::getModel('taxify/request_calculate');

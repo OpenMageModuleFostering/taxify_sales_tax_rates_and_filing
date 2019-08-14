@@ -1,5 +1,7 @@
 <?php
 
+// This model will (when appropriate) override default Magento Tax calculation
+// This is where tax calculation is kicked off from
 class Vonnda_Taxify_Model_Sales_Quote_Address_Total_Tax extends Mage_Sales_Model_Quote_Address_Total_Tax
 {
     protected $_appliedTaxes = array();

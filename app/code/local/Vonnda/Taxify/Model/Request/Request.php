@@ -1,5 +1,6 @@
 <?php
 
+// Base Taxify request
 class Vonnda_Taxify_Model_Request_Request extends Mage_Core_Model_Abstract
 {
     public $order;

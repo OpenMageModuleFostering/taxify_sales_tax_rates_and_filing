@@ -1,5 +1,6 @@
 <?php
 
+// Main API client.  All API calls to Taxify flow through this class
 class Vonnda_Taxify_Model_Client extends Mage_Core_Model_Abstract
 {
 
@@ -8,8 +9,10 @@ class Vonnda_Taxify_Model_Client extends Mage_Core_Model_Abstract
     public $response;
     public $url = '';
     public $soapClient;
-    public $logFilename = 'taxify.log';
+    public $logFilename = 'taxify.log'; // Name of file to write logs to
     public $requestNodeName = 'Request';
+
+    // Do not change this key unless instructed by Taxify
     const PARTNER_KEY = '275067E9-C359-4BF3-AC6E-2772456F6FAD';
 
     public function __construct()
