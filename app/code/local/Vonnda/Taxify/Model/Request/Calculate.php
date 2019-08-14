@@ -68,7 +68,7 @@ class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_
             $line['Quantity'] = $item->getData('qty');
         }
         $line['ItemDescription'] = $item->getName();
-
+        $line['DiscountAmount'] = $item->getDiscountAmount();
         // * (blank) : Taxify will assume the item is generally taxable "tangible goods" unless
         //   otherwise configured (by ItemKey) in Taxify
         // * "NON" : a generally non taxable item or service
@@ -174,18 +174,13 @@ class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_
             return $items;
         }
 
-        $pennies = $discountAmount * 100;
-        $pennies = (int) $pennies;
-        while ($pennies > 0) {
-            foreach ($items as $index => $item) {
-                if ($this->isShippingItem($item)) {
-                    continue; // Don't subtract discount from shipping line items
-                }
-                $items[$index]['ActualExtendedPrice'] = number_format($items[$index]['ActualExtendedPrice'] - 0.01, 2);
-                if ($items[$index]['ActualExtendedPrice'] == 0) {
-                    $pennies = 0; // Stop, can't give a negative price on products
-                }
-                $pennies = $pennies - 1;
+        foreach ($items as $index => $item) {
+            if ($this->isShippingItem($item)) {
+                continue; // Don't subtract discount from shipping line items
+            }
+            $items[$index]['ActualExtendedPrice'] = number_format($items[$index]['ActualExtendedPrice'] - $items[$index]['DiscountAmount'], 2);
+            if ($items[$index]['ActualExtendedPrice'] == 0) {
+                continue;
             }
         }
 
