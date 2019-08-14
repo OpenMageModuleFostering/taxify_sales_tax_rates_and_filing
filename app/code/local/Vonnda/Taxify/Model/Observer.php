@@ -8,18 +8,20 @@ class Vonnda_Taxify_Model_Observer
         $this->config = Mage::getModel('taxify/config');
     }
 
-    public function isEnabled()
+    public function isEnabled($storeId=null)
     {
-        return $this->config->isEnabled();
+        return $this->config->isEnabled($storeId);
     }
 
     public function quoteCollectTotalsBefore(Varien_Event_Observer $observer)
     {
-        if (!$this->isEnabled()) {
+        $storeId = $observer->getEvent()->getQuote()->getStoreId();
+        if (!$this->isEnabled($storeId)) {
             return;
         }
 
-        Mage::getConfig()->setNode('global/sales/quote/totals/tax/class', 'vonnda_taxify_model_sales_quote_address_total_tax');
+        Mage::getConfig()->setNode('global/sales/quote/totals/tax/class',
+            'vonnda_taxify_model_sales_quote_address_total_tax');
     }
 
     public function salesOrderPlaceAfter(Varien_Event_Observer $observer)

@@ -46,7 +46,7 @@ class Vonnda_Taxify_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function getProductTaxClassMap()
     {
-        $map = array('0' => 'NON', '6' => 'NON');
+        $map = array();
         foreach (Mage::getModel('tax/class')->getCollection() as $taxClass) {
             $map[$taxClass->getClassId()] =
             $taxClass->getTaxifyProductTaxability();

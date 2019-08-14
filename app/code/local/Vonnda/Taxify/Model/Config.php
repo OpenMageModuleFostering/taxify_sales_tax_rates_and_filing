@@ -12,8 +12,12 @@ class Vonnda_Taxify_Model_Config extends Mage_Core_Model_Abstract
         return 'https://ws.taxify.co/taxify/1.0/core/service.asmx';
     }
 
-    public function isEnabled()
+    public function isEnabled($storeId=null)
     {
+        if ($storeId) {
+            return Mage::getStoreConfigFlag('tax/taxify/enabled', $storeId);
+        }
+
         return Mage::getStoreConfigFlag('tax/taxify/enabled');
     }
 

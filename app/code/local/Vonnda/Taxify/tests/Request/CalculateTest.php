@@ -80,7 +80,7 @@ class CalculateTest extends PHPUnit_Framework_TestCase
 
         $resp = $calculate->getItemTaxabilityCode($item);
 
-        $this->assertEquals('NON', $resp);
+        $this->assertEquals('', $resp);
 
 
         $calculate = Mage::getModel('taxify/request_calculate');
@@ -95,7 +95,7 @@ class CalculateTest extends PHPUnit_Framework_TestCase
 
         $resp = $calculate->getItemTaxabilityCode($item);
 
-        $this->assertEquals('NON', $resp);
+        $this->assertEquals('', $resp);
     }
 
     public function testSpreadDiscountToItems()
