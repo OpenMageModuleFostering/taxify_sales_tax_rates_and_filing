@@ -2,7 +2,6 @@
 
 class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_Request
 {
-
     public $apiMethod = 'CalculateTax';
     public $isCommited = 'false';
 
@@ -216,7 +215,7 @@ class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_
         if ($this->order) {
             $this->request['DocumentKey'] = $this->order->getIncrementId();
         } else {
-            $this->request['DocumentKey'] = 'q-'. $this->getMageModel()->getId();
+            $this->request['DocumentKey'] = 'q-'.$this->getMageModel()->getId();
         }
 
         $timezone = 'America/Los_Angeles';
@@ -291,5 +290,4 @@ class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_
 
         return $tax;
     }
-
 }

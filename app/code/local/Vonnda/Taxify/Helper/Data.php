@@ -4,11 +4,10 @@ class Vonnda_Taxify_Helper_Data extends Mage_Core_Helper_Abstract
 {
     public function getCustomerTaxabilityOptions()
     {
-        return array(
-            '' => 'Default',
-            'R' => 'Reseller / Wholesale',
-            'NON' => 'Tax Exempt',
-        );
+        $codReq = Mage::getModel('taxify/request_codes');
+        $codReq->send();
+
+        return $codReq->getCodesWithLabels();
     }
 
     public function getTaxifyCustomerTaxability($customerId)

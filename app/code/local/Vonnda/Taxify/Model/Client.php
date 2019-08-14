@@ -9,6 +9,7 @@ class Vonnda_Taxify_Model_Client extends Mage_Core_Model_Abstract
     public $url = '';
     public $soapClient;
     public $logFilename = 'taxify.log';
+    public $requestNodeName = 'Request';
     const PARTNER_KEY = '275067E9-C359-4BF3-AC6E-2772456F6FAD';
 
     public function __construct()
@@ -29,16 +30,21 @@ class Vonnda_Taxify_Model_Client extends Mage_Core_Model_Abstract
 
     public function addSecurityToRequest()
     {
-        $this->request['Request']['Security'] = array(
+        $this->request[$this->requestNodeName]['Security'] = array(
             'Username' => $this->config->getApiUsername(),
             'Password' => $this->config->getApiPassword(),
         );
-        $this->request['Request']['Security']['PartnerKey'] = self::PARTNER_KEY;
+        $this->request[$this->requestNodeName]['Security']['PartnerKey'] = self::PARTNER_KEY;
     }
 
     public function buildRequest($req)
     {
-        $this->request['Request'] = $req;
+        // Because GetCodes doesn't have the "Request" node.
+        if (array_key_exists('GetCodes', $req)) {
+            $this->requestNodeName = 'GetCodes';
+        }
+
+        $this->request[$this->requestNodeName] = $req;
         $this->addSecurityToRequest();
     }
 

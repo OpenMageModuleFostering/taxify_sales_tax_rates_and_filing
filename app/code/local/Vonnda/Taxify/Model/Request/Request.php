@@ -2,7 +2,6 @@
 
 class Vonnda_Taxify_Model_Request_Request extends Mage_Core_Model_Abstract
 {
-
     public $order;
     public $request = array();
     public $response;
@@ -16,7 +15,7 @@ class Vonnda_Taxify_Model_Request_Request extends Mage_Core_Model_Abstract
 
     public function loadOrder($order)
     {
-        $this->order = $order; 
+        $this->order = $order;
     }
 
     public function loadQuote($quote)
@@ -63,5 +62,4 @@ class Vonnda_Taxify_Model_Request_Request extends Mage_Core_Model_Abstract
 
         return $region->getCode();
     }
-
 }

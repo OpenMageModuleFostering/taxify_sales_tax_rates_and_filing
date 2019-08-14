@@ -4,7 +4,8 @@ class Vonnda_Taxify_Model_Sales_Quote_Address_Total_Tax extends Mage_Sales_Model
 {
     protected $_appliedTaxes = array();
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->setCode('tax');
     }
 
@@ -14,8 +15,6 @@ class Vonnda_Taxify_Model_Sales_Quote_Address_Total_Tax extends Mage_Sales_Model
 
         $address->setTaxAmount(0);
         $address->setBaseTaxAmount(0);
-        //$address->setShippingTaxAmount(0);
-        //$address->setBaseShippingTaxAmount(0);
         $address->setAppliedTaxes(array());
 
         $items = $address->getAllItems();
@@ -25,7 +24,6 @@ class Vonnda_Taxify_Model_Sales_Quote_Address_Total_Tax extends Mage_Sales_Model
         $custTaxClassId = $address->getQuote()->getCustomerTaxClassId();
 
         $taxCalculationModel = Mage::getSingleton('tax/calculation');
-        /* @var $taxCalculationModel Mage_Tax_Model_Calculation */
         $request = $taxCalculationModel->getRateRequest(
             $address,
             $address->getQuote()->getBillingAddress(),
@@ -36,12 +34,10 @@ class Vonnda_Taxify_Model_Sales_Quote_Address_Total_Tax extends Mage_Sales_Model
         // Added by Mark Sanborn
         $data = $address->getQuote()->getShippingAddress()->getData();
         if ($data) {
-            //if (in_array('street', array_keys($data)) && $data['street'] != '' && in_array('city', array_keys($data))) {
             if (in_array('postcode', array_keys($data)) && $data['postcode'] != '') {
                 $calculate = Mage::getModel('taxify/request_calculate');
                 $calculate->loadQuote($address->getQuote());
                 $calculate->send();
-                
             } else {
                 return $this;
             }
@@ -62,7 +58,6 @@ class Vonnda_Taxify_Model_Sales_Quote_Address_Total_Tax extends Mage_Sales_Model
             $item->setTaxPercent($lineTax['rate']);
             $item->setTaxAmount($lineTax['amount']);
             $item->setBaseTaxAmount($lineTax['amount']);
-            //$item->calcTaxAmount();
 
             if ($discountBefore != $item->getDiscountAmount()) {
                 $address->setDiscountAmount(
@@ -95,24 +90,23 @@ class Vonnda_Taxify_Model_Sales_Quote_Address_Total_Tax extends Mage_Sales_Model
             );
         }
 
-
         $shippingTaxClass = Mage::getStoreConfig(Mage_Tax_Model_Config::CONFIG_XML_PATH_SHIPPING_TAX_CLASS, $store);
 
-        $shippingTax      = 0;
-        $shippingBaseTax  = 0;
+        $shippingTax = 0;
+        $shippingBaseTax = 0;
 
         if ($shippingTaxClass) {
             if ($rate = $taxCalculationModel->getRate($request->setProductClassId($shippingTaxClass))) {
                 if (!Mage::helper('tax')->shippingPriceIncludesTax()) {
-                    $shippingTax    = $address->getShippingAmount() * $rate/100;
-                    $shippingBaseTax= $address->getBaseShippingAmount() * $rate/100;
+                    $shippingTax = $address->getShippingAmount() * $rate / 100;
+                    $shippingBaseTax = $address->getBaseShippingAmount() * $rate / 100;
                 } else {
-                    $shippingTax    = $address->getShippingTaxAmount();
-                    $shippingBaseTax= $address->getBaseShippingTaxAmount();
+                    $shippingTax = $address->getShippingTaxAmount();
+                    $shippingBaseTax = $address->getBaseShippingTaxAmount();
                 }
 
-                $shippingTax    = $store->roundPrice($shippingTax);
-                $shippingBaseTax= $store->roundPrice($shippingBaseTax);
+                $shippingTax = $store->roundPrice($shippingTax);
+                $shippingBaseTax = $store->roundPrice($shippingBaseTax);
 
                 $address->setTaxAmount($address->getTaxAmount() + $shippingTax);
                 $address->setBaseTaxAmount($address->getBaseTaxAmount() + $shippingBaseTax);
@@ -152,6 +146,7 @@ class Vonnda_Taxify_Model_Sales_Quote_Address_Total_Tax extends Mage_Sales_Model
 
         $address->setGrandTotal($address->getGrandTotal() + $address->getTaxAmount());
         $address->setBaseGrandTotal($address->getBaseGrandTotal() + $address->getBaseTaxAmount());
+
         return $this;
     }
 
@@ -172,8 +167,8 @@ class Vonnda_Taxify_Model_Sales_Quote_Address_Total_Tax extends Mage_Sales_Model
                 $row['percent'] = $row['percent'] ? $row['percent'] : 1;
                 $rate = $rate ? $rate : 1;
 
-                $appliedAmount = $amount/$rate*$row['percent'];
-                $baseAppliedAmount = $baseAmount/$rate*$row['percent'];
+                $appliedAmount = $amount / $rate * $row['percent'];
+                $baseAppliedAmount = $baseAmount / $rate * $row['percent'];
             } else {
                 $appliedAmount = 0;
                 $baseAppliedAmount = 0;
@@ -182,7 +177,6 @@ class Vonnda_Taxify_Model_Sales_Quote_Address_Total_Tax extends Mage_Sales_Model
                     $baseAppliedAmount += $rate['base_amount'];
                 }
             }
-
 
             if ($appliedAmount || $previouslyAppliedTaxes[$row['id']]['amount']) {
                 $previouslyAppliedTaxes[$row['id']]['amount'] += $appliedAmount;
@@ -200,15 +194,15 @@ class Vonnda_Taxify_Model_Sales_Quote_Address_Total_Tax extends Mage_Sales_Model
         $store = $address->getQuote()->getStore();
         $amount = $address->getTaxAmount();
 
-        if (($amount!=0) || (Mage::helper('tax')->displayZeroTax($store))) {
+        if (($amount != 0) || (Mage::helper('tax')->displayZeroTax($store))) {
             $address->addTotal(array(
-                'code'=>$this->getCode(),
-                'title'=>Mage::helper('sales')->__('Tax'),
-                'full_info'=>$applied ? $applied : array(),
-                'value'=>$amount
+                'code' => $this->getCode(),
+                'title' => Mage::helper('sales')->__('Tax'),
+                'full_info' => $applied ? $applied : array(),
+                'value' => $amount,
             ));
         }
+
         return $this;
     }
 }
-
