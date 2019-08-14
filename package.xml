@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>Taxify_Sales_Tax_Rates_and_Filing</name>
+    <version>0.1.0</version>
+    <stability>stable</stability>
+    <license uri="http://www.gnu.org/licenses/gpl-2.0.html">GNU General Public License V2</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Connect Taxify to deliver accurate, automated U.S. sales tax rates, reports, filings and remittance.</summary>
+    <description>Taxify ensures that your Magento store collects, reports and remits accurate sales taxes for all Federal, state, and local jurisdictions  throughout the United States</description>
+    <notes>Initial Public Release</notes>
+    <authors><author><name>Vonnda Development</name><user>Vonnda</user><email>info@vonnda.com</email></author></authors>
+    <date>2014-12-15</date>
+    <time>23:48:51</time>
+    <contents><target name="magelocal"><dir name="Vonnda"><dir name="Taxify"><dir name="Helper"><file name="Data.php" hash="e32968cf048260b74e517d3b89a2c958"/></dir><dir name="Model"><file name="Client.php" hash="cdf70e673f02fef1f6151767a2192a6d"/><file name="Config.php" hash="2db3425ee59a162dedf5ef8a4fa655e3"/><file name="Observer.php" hash="52d7d7e74b2a0676b58ad4262e26fc49"/><dir name="Request"><file name="Calculate.php" hash="04991b60a6d275dce10dff29b3587242"/><file name="Cancel.php" hash="2d1eadf52123f4db8151832502d8ba01"/><file name="Commit.php" hash="3ec21b8860ab14f3eadc7bb9e53c02c1"/><file name="Request.php" hash="c4e92c7d67e249750508017b74d0cc3c"/><file name="Verifyaddress.php" hash="fff9f9d0ac574ac185916afaf7bdde0c"/><file name="Version.php" hash="ff41825cbc827abed4e0a2597e67ee67"/></dir><dir name="Sales"><dir name="Quote"><dir name="Address"><dir name="Total"><file name="Tax.php" hash="8f7ffa65d9d537e4558329d46f53b47a"/></dir><file name=".DS_Store" hash="597d6465d3bf56596aa5d8b6d9cea71a"/></dir><file name=".DS_Store" hash="5121c407478e52c47edd5676e190639f"/></dir><file name=".DS_Store" hash="53382ecfa4ef21cc00d74e43b14e2af3"/></dir><file name=".DS_Store" hash="7467329ac245e0cd056b0f6d16c2f265"/></dir><dir name="etc"><file name="config.xml" hash="ec35149e731c5954e683bcb2ab80900e"/><file name="system.xml" hash="f99743421bbf8bf7c4d19dca7a4b0d53"/></dir><dir name="tests"><dir name="Request"><file name="CalculateTest.php" hash="1e713f75e1d9c31f345785a01ed5514b"/><file name="CancelTest.php" hash="b8ba6f0004d493f72ce22c66375ffdac"/><file name="CommitTest.php" hash="59c4473ba919047dd821e05b335dbc38"/></dir><file name="SampleTest.php" hash="32606c8d8b84d95aec73bdeb1c03ca1e"/><dir name="fixtures"><file name="calculateMultiSimpleProductSuccess.txt" hash="6d7426310bebbcb0b758697035a4e8f7"/><file name="calculateSuccess.txt" hash="892ebdae0cd70bcf36cc34be2d21da76"/></dir><file name=".DS_Store" hash="602e058d9d6a6e59e71142f3530a0908"/></dir><file name=".DS_Store" hash="84b97966f4cf3cd32c9e809b24e70b4f"/></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Vonnda_Taxify.xml" hash="2a0fff9753a9d1d84e4f10db680d30e3"/></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.3.0</min><max>5.6.2</max></php></required></dependencies>
+</package>
