@@ -1,6 +1,6 @@
 <?php
 
-class Vonnda_Taxify_ExportController extends Mage_Adminhtml_Controller_Action
+class Vonnda_Taxify_TaxifyController extends Mage_Adminhtml_Controller_Action
 {
 
     public function indexAction()

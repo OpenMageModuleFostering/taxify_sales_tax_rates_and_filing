@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Vonnda_Taxify>
-            <version>0.1.7</version>
+            <version>0.1.8</version>
         </Vonnda_Taxify>
     </modules>
     <global>
@@ -78,13 +78,13 @@
     </global>
     <admin>
         <routers>
-            <vonnda_taxify>
-                <use>admin</use>
+            <adminhtml>
                 <args>
-                    <module>Vonnda_Taxify</module>
-                    <frontName>admintaxify</frontName>
+                    <modules>
+                        <vonnda_taxify after="Mage_Adminhtml">Vonnda_Taxify</vonnda_taxify>
+                    </modules>
                 </args>
-            </vonnda_taxify>
+            </adminhtml>
         </routers>
     </admin>
     <adminhtml>

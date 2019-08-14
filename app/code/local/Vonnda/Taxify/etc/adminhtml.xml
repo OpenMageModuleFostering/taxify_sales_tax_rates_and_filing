@@ -20,7 +20,6 @@
             </admin>
         </resources>
     </acl>
-    
     <menu>
         <system>
             <children>
@@ -29,7 +28,7 @@
                         <taxify-export translate="title" module="taxify">
                             <title>Taxify Order Export</title>
                             <sort_order>1000</sort_order>
-                            <action>admintaxify/export/index</action>
+                            <action>adminhtml/taxify/index</action>
                         </taxify-export>
                     </children>
                 </tools>
