@@ -7,14 +7,12 @@ class HelperDataTest extends PHPUnit_Framework_TestCase
         $helper = Mage::helper('taxify');
         $options = $helper->getCustomerTaxabilityOptions();
         $expected = array(
-            '' => 'Default',
-            'CLOTHING' => 'Clothing',
-            'FOOD' => 'Food',
-            'FREIGHT' => 'Freight',
-            'NONTAX' => 'Nontax',
-            'TAXABLE' => 'Taxable',
-            'WINE' => 'Wine',
+            '' => 'None',
+            'RESALE' => 'Resale',
+            'RETAIL' => 'Retail',
+            'USETAX' => 'Usetax',
         );
         $this->assertEquals($expected, $options);
     }
+
 }

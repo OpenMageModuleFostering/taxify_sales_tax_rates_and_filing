@@ -3,6 +3,7 @@
 class Vonnda_Taxify_Model_Request_Codes extends Vonnda_Taxify_Model_Request_Request
 {
     public $apiMethod = 'GetCodes';
+    public $codeType = 'Item';
     public $defaultCodes = array(
         '',
         'CLOTHING',
@@ -14,7 +15,7 @@ class Vonnda_Taxify_Model_Request_Codes extends Vonnda_Taxify_Model_Request_Requ
 
     public function build()
     {
-        $this->request['GetCodes'] = array('CodeType' => 'Item');
+        $this->request['GetCodes'] = array('CodeType' => $this->codeType);
     }
 
     public function getCodes()
@@ -47,8 +48,11 @@ class Vonnda_Taxify_Model_Request_Codes extends Vonnda_Taxify_Model_Request_Requ
 
     public function getLabelFromCode($code)
     {
-        if ($code == '') {
+        if ($code == '' && $this->codeType == 'Item') {
             return 'Default';
+        }
+        if ($code == '' && $this->codeType == 'Customer') {
+            return 'None';
         }
 
         return ucwords(strtolower($code));

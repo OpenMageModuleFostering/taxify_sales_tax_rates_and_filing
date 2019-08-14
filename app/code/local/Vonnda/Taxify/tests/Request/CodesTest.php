@@ -6,7 +6,10 @@ class CodesTest extends PHPUnit_Framework_TestCase
     public function testCodesModelExists()
     {
         $client = Mage::getModel('taxify/request_codes');
-        $this->assertTrue(is_object($client), 'The model taxify/request_codes should exist');
+        $this->assertTrue(
+            is_object($client),
+            'The model taxify/request_codes should exist'
+        );
     }
 
     public function testBuildRequest()
@@ -46,6 +49,16 @@ class CodesTest extends PHPUnit_Framework_TestCase
         $client->getCodesWithLabels();
 
         $this->assertEquals($expected, $client->getCodesWithLabels());
+    }
 
+    public function testGetCustomerCodes()
+    {
+        $client = Mage::getModel('taxify/request_codes');
+        $client->codeType = 'Customer';
+        $expected = array('GetCodes' => array('CodeType' => 'Customer'));
+
+        $client->build();
+
+        $this->assertEquals($expected, $client->request);
     }
 }

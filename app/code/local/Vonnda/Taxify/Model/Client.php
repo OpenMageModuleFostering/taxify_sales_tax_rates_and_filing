@@ -42,6 +42,7 @@ class Vonnda_Taxify_Model_Client extends Mage_Core_Model_Abstract
         // Because GetCodes doesn't have the "Request" node.
         if (array_key_exists('GetCodes', $req)) {
             $this->requestNodeName = 'GetCodes';
+            $req = $req['GetCodes'];
         }
 
         $this->request[$this->requestNodeName] = $req;
@@ -52,8 +53,10 @@ class Vonnda_Taxify_Model_Client extends Mage_Core_Model_Abstract
     {
         $this->log('URL:'. $this->url);
         $this->log('REQUEST:');
+        $this->log($this->soapClient->__getLastRequest());
         $this->log($this->request);
         $this->log('RESPONSE:');
+        $this->log($this->soapClient->__getLastResponse());
         $this->log($this->response);
     }
 

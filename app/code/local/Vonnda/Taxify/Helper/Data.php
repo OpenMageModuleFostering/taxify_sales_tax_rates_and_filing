@@ -5,6 +5,15 @@ class Vonnda_Taxify_Helper_Data extends Mage_Core_Helper_Abstract
     public function getCustomerTaxabilityOptions()
     {
         $codReq = Mage::getModel('taxify/request_codes');
+        $codReq->codeType = 'Customer';
+        $codReq->send();
+
+        return $codReq->getCodesWithLabels();
+    }
+
+    public function getProductTaxabilityOptions()
+    {
+        $codReq = Mage::getModel('taxify/request_codes');
         $codReq->send();
 
         return $codReq->getCodesWithLabels();
@@ -33,5 +42,16 @@ class Vonnda_Taxify_Helper_Data extends Mage_Core_Helper_Abstract
         $tax = Mage::getModel('tax/class')->load($group->getTaxClassId());
 
         return $tax->getTaxifyCustomerTaxability();
+    }
+
+    public function getProductTaxClassMap()
+    {
+        $map = array();
+        foreach (Mage::getModel('tax/class')->getCollection() as $taxClass) {
+            $map[$taxClass->getClassId()] =
+            $taxClass->getTaxifyProductTaxability();
+        }
+
+        return $map;
     }
 }

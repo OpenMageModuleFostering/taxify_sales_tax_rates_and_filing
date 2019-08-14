@@ -46,7 +46,7 @@ class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_
     {
         $taxClassId = $item->getProduct()->getTaxClassId();
 
-        $map = array('0' => 'NON', '6' => 'NON');
+        $map = Mage::helper('taxify')->getProductTaxClassMap();
 
         if (isset($map[$taxClassId])) {
             return $map[$taxClassId];
