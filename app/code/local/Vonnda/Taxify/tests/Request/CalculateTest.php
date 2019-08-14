@@ -98,4 +98,62 @@ class CalculateTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('NON', $resp);
     }
 
+    public function testSpreadDiscountToItems()
+    {
+        $items = array (
+            array (
+                'LineNumber' => '2523',
+                'ItemKey' => 'ace000',
+                'ActualExtendedPrice' => '295.00',
+                'Quantity' => 1,
+                'ItemDescription' => 'Aviator Sunglasses',
+                'ItemTaxabilityCode' => '',
+            ),
+            array (
+                'LineNumber' => 0,
+                'ItemKey' => 'SHIPPING',
+                'ActualExtendedPrice' => '5.00',
+                'Quantity' => 1,
+                'ItemDescription' => 'Shipping',
+                'ItemTaxabilityCode' => 'FR',
+            ),
+        );
+
+        $tests = array(
+            10.000 => array(285.00, 5.00),
+            0.000 => array(295.00, 5.00),
+            295.000 => array(0.00, 5.00),
+            300.000 => array(0.00, 5.00),
+        );
+
+        $calculate = Mage::getModel('taxify/request_calculate');
+
+        foreach ($tests as $discountAmount => $values) {
+            $resp = $calculate->spreadDiscountToItems($items, $discountAmount);
+            $this->assertEquals($values[0], $resp[0]['ActualExtendedPrice']);
+            $this->assertEquals($values[1], $resp[1]['ActualExtendedPrice']);
+        }
+    }
+
+    public function testSpreadDiscountToItemsDoesntInfiniteLoopWhenNoItems()
+    {
+        $items = array (
+            array (
+                'LineNumber' => 0,
+                'ItemKey' => 'SHIPPING',
+                'ActualExtendedPrice' => '5.00',
+                'Quantity' => 1,
+                'ItemDescription' => 'Shipping',
+                'ItemTaxabilityCode' => 'FR',
+            ),
+        );
+        $calculate = Mage::getModel('taxify/request_calculate');
+
+        $resp = $calculate->spreadDiscountToItems($items, 20.00);
+        $this->assertEquals(5.00, $resp[0]['ActualExtendedPrice']);
+
+        // Make sure empty array doesn't loop forever
+        $calculate->spreadDiscountToItems(array(), 20.00);
+    }
+
 }

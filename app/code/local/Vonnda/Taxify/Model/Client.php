@@ -15,7 +15,6 @@ class Vonnda_Taxify_Model_Client extends Mage_Core_Model_Abstract
     {
         $this->config = Mage::getModel('taxify/config');
         $this->url = $this->config->getApiUrl(). '?wsdl';
-        $this->log('URL:'. $this->url);
 
         $this->soapClient = new SoapClient($this->url, array(
             'trace' => 1,
@@ -45,6 +44,7 @@ class Vonnda_Taxify_Model_Client extends Mage_Core_Model_Abstract
 
     public function logTransaction()
     {
+        $this->log('URL:'. $this->url);
         $this->log('REQUEST:');
         $this->log($this->request);
         $this->log('RESPONSE:');

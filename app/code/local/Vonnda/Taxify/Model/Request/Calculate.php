@@ -143,7 +143,72 @@ class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_
         }
         $lines[] = $this->buildShipmentLineItem();
 
-        $this->request['Lines']['TaxRequestLine'] = $lines;
+        return $lines;
+    }
+
+    private function isShippingItem($item)
+    {
+        if ($item['LineNumber'] == 0 || $item['ItemKey'] == 'SHIPPING') {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function numNonShippingItems($items)
+    {
+        $count = 0;
+        foreach ($items as $item) {
+            if (!$this->isShippingItem($item)) {
+                $count = $count + 1;
+            }
+        }
+
+        return $count;
+    }
+
+    public function spreadDiscountToItems($items, $discountAmount)
+    {
+        // No items, no discount spreading
+        if ($this->numNonShippingItems($items) < 1) {
+            return $items;
+        }
+
+        $pennies = (int) $discountAmount * 100;
+        while ($pennies > 0) {
+            foreach ($items as $index => $item) {
+                if ($this->isShippingItem($item)) {
+                    continue; // Don't subtract discount from shipping line items
+                }
+                $items[$index]['ActualExtendedPrice'] = number_format($items[$index]['ActualExtendedPrice'] - 0.01, 2);
+                if ($items[$index]['ActualExtendedPrice'] == 0) {
+                    $pennies = 0; // Stop, can't give a negative price on products
+                }
+                $pennies = $pennies - 1;
+            }
+        }
+
+        return $items;
+    }
+
+    public function getTotalDiscount()
+    {
+        if (!$this->getMageModel()) {
+            return 0;
+        }
+
+        $totals = $this->getMageModel()->getTotals();
+        if (!$totals) {
+            return 0;
+        }
+        $discount = 0;
+        foreach ($totals as $total) {
+            if ($total->getValue() < 0) {
+                $discount = $discount + abs($total->getValue());
+            }
+        }
+
+        return $discount;
     }
 
     public function build()
@@ -160,7 +225,7 @@ class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_
         $this->request['TaxDate'] = date('Y-m-d');
         date_default_timezone_set($originalTimeZone);
 
-        $this->buildOrderLineItems();
+        $this->request['Lines']['TaxRequestLine'] = $this->spreadDiscountToItems($this->buildOrderLineItems(), $this->getTotalDiscount());
         $this->buildDestinationAddress();
         $this->request['IsCommited'] = false;
         $this->request['CustomerKey'] = $this->getMageModel()->getCustomerId();
@@ -168,7 +233,7 @@ class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_
         // (blank) : default, consumer
         // "NON" : tax exempt customer – sales tax will not be charged
         // "R" : reseller / wholesale transaction - sales tax will not be charged
-        $this->request['CustomerTaxability'] = '';
+        $this->request['CustomerTaxabilityCode'] = Mage::helper('taxify')->getTaxifyCustomerTaxabilityFromGroup($this->getMageModel()->getCustomerGroupId());
 
         return $this->request;
     }
