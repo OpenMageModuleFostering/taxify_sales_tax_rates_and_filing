@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <tools>
+                                <children>
+                                    <taxify-export translate="title" module="taxify">
+                                        <title>Taxify Order Export</title>
+                                        <sort_order>0</sort_order>
+                                    </taxify-export>
+                                </children>
+                            </tools>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    
+    <menu>
+        <system>
+            <children>
+                <tools>
+                    <children>
+                        <taxify-export translate="title" module="taxify">
+                            <title>Taxify Order Export</title>
+                            <sort_order>1000</sort_order>
+                            <action>admintaxify/export/index</action>
+                        </taxify-export>
+                    </children>
+                </tools>
+            </children>
+        </system>
+    </menu>
+</config>

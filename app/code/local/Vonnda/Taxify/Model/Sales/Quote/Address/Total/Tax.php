@@ -61,6 +61,7 @@ class Vonnda_Taxify_Model_Sales_Quote_Address_Total_Tax extends Mage_Sales_Model
             $lineTax = $calculate->getTaxByLineNumber($item->getId());
             $item->setTaxPercent($lineTax['rate']);
             $item->setTaxAmount($lineTax['amount']);
+            $item->setBaseTaxAmount($lineTax['amount']);
             //$item->calcTaxAmount();
 
             if ($discountBefore != $item->getDiscountAmount()) {
