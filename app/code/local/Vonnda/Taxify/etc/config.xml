@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Vonnda_Taxify>
-            <version>0.1.3</version>
+            <version>0.1.4</version>
         </Vonnda_Taxify>
     </modules>
     <global>
