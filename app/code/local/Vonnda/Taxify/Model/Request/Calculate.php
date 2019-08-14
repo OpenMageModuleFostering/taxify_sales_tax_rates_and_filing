@@ -61,7 +61,7 @@ class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_
         $line = array();
         $line['LineNumber'] = $item->getItemId();
         $line['ItemKey'] = $item->getSku();
-        $line['ActualExtendedPrice'] = number_format($item->getBaseRowTotal(), 2);
+        $line['ActualExtendedPrice'] = number_format($item->getBaseRowTotal(), 2, '.', '');
         if ($item->getQtyOrdered()) {
             $line['Quantity'] = $item->getQtyOrdered();
         } else {
