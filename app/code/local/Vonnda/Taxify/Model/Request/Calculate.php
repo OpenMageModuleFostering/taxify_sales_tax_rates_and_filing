@@ -1,6 +1,6 @@
 <?php
 
-class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_Request 
+class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_Request
 {
 
     public $apiMethod = 'CalculateTax';
@@ -219,9 +219,14 @@ class Vonnda_Taxify_Model_Request_Calculate extends Vonnda_Taxify_Model_Request_
             $this->request['DocumentKey'] = 'q-'. $this->getMageModel()->getId();
         }
 
-        $originalTimeZone = date_default_timezone_get();
+        $timezone = 'America/Los_Angeles';
+        $mageTimezone = Mage::getStoreConfig('general/locale/timezone');
+        if ($mageTimezone) {
+            $timezone = $mageTimezone;
+        }
 
-        date_default_timezone_set('America/Los_Angeles');
+        $originalTimeZone = date_default_timezone_get();
+        date_default_timezone_set($timezone);
         $this->request['TaxDate'] = date('Y-m-d');
         date_default_timezone_set($originalTimeZone);
 
