@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Taxify_Sales_Tax_Rates_and_Filing",
+    "name": "OpenMageModuleFostering\/Taxify_Sales_Tax_Rates_and_Filing",
     "type": "magento-module",
     "license": "GNU-General-Public-License-V2",
     "homepage": "",
     "description": "Connect Taxify to deliver accurate, automated U.S. sales tax rates, reports, filings and remittance.",
     "authors": [
-    {
-        "name": "Vonnda Development",
-        "email": "info@vonnda.com"
-    }
-],
+        {
+            "name": "Vonnda Development",
+            "email": "info@vonnda.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
