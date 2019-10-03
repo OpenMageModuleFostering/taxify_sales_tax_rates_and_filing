@@ -1,5 +1,5 @@
 {
-    "name": "OpenMageModuleFostering\/Taxify_Sales_Tax_Rates_and_Filing",
+    "name": "openmage-module-fostering\/taxify_sales_tax_rates_and_filing",
     "type": "magento-module",
     "license": "GNU-General-Public-License-V2",
     "homepage": "",
